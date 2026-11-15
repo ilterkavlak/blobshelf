@@ -160,7 +160,7 @@ backed up.
 | `Sources/BlobshelfCore` | Everything without a UI: networking, token and credentials, S3 client and signing, drive semantics, backup engine, Keychain and config. |
 | `Sources/Blobshelf` | The SwiftUI app and its menu bar panel. |
 | `Tests/BlobshelfCoreTests` | Unit tests, plus live tests against a real bucket. |
-| `Support`, `scripts`, `install.sh` | Entitlements, build and packaging scripts. |
+| `Support`, `scripts`, `install.sh`, `uninstall.sh` | Entitlements, build, packaging and install scripts. |
 
 ## Develop
 
@@ -208,15 +208,16 @@ through [issues](../../issues) or, for security, [SECURITY.md](SECURITY.md).
 ## Uninstall
 
 1. If you turned on **Open at login**, turn it off in the app's Settings.
-2. Quit Blobshelf from its menu bar icon (gear → Quit).
-3. Remove the app and its data:
+2. In the folder you installed from, run:
    ```bash
-   rm -rf "/Applications/Blobshelf.app" "$HOME/Applications/Blobshelf.app"
-   rm -rf ~/Library/Containers/io.github.ilterkavlak.blobshelf
+   ./uninstall.sh
    ```
 
-Bucket tokens can be removed in Keychain Access by searching for
-`io.github.ilterkavlak.blobshelf`. Nothing in your buckets is deleted.
+It asks before it does anything. It quits the app, then removes the app, its settings and backup
+records (`~/Library/Containers/io.github.ilterkavlak.blobshelf` and
+`~/Library/Application Scripts/io.github.ilterkavlak.blobshelf`), and the bucket tokens in your
+Keychain. Nothing in your buckets or backed-up folders is deleted. Afterwards you can delete the
+source folder too.
 
 ## License
 
