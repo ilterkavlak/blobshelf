@@ -47,6 +47,7 @@ Permissions and "What leaves your Mac" sections of `README.md`.
 | `Support/Blobshelf.entitlements` | The app's entire permission set |
 | `scripts/` | `test.sh`, `build-app.sh` (bundle + ad-hoc signing), `make-icon.swift` |
 | `install.sh` | What end users run to build and install |
+| `uninstall.sh` | Removes the app, its data and its Keychain tokens; keep it in sync with what the app stores |
 
 Logic belongs in `BlobshelfCore`, which has no UI and is fully testable. The app target stays a
 thin layer of state and views.
