@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Toolchain
+        run: swift --version
+      - name: Build (warnings are errors)
+        run: swift build -Xswiftc -warnings-as-errors
+      - name: Test
+        run: scripts/test.sh
+      - name: Package the app
+        run: scripts/build-app.sh
+      - name: Entitlements are exactly the expected four
+        run: |
+          codesign -d --entitlements :- "build/Blobshelf.app" 2>/dev/null \
+            | plutil -convert json -o - - | python3 -c 'import json,sys; print("\n".join(sorted(json.load(sys.stdin))))' > actual.txt
+          printf '%s\n' com.apple.security.app-sandbox com.apple.security.files.bookmarks.app-scope \
+            com.apple.security.files.user-selected.read-write com.apple.security.network.client > expected.txt
+          diff -u expected.txt actual.txt
