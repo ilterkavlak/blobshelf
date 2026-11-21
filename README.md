@@ -2,7 +2,7 @@
 
 # Blobshelf
 
-**Your Upstash Blob buckets as a drive on your Mac, with automatic folder backups.**
+**A native Mac app for your Upstash Blob buckets, with automatic folder backups.**
 
 [![CI](https://github.com/ilterkavlak/blobshelf/actions/workflows/ci.yml/badge.svg)](https://github.com/ilterkavlak/blobshelf/actions/workflows/ci.yml)
 ![macOS 14+](https://img.shields.io/badge/macOS-14%2B-black?logo=apple)
@@ -13,9 +13,10 @@
 </div>
 
 Blobshelf is a small native macOS app for [Upstash Blob](https://upstash.com). Browse your
-buckets like folders in Finder, and keep folders on your Mac backed up to them automatically,
-much like Google Drive for desktop. It runs in Apple's App Sandbox with the smallest set of
-permissions it can work with, and you build it yourself from this source.
+buckets in the app's own window, with folders, drag and drop and Quick Look, and keep folders on
+your Mac backed up to them automatically. It is a standalone app: your buckets don't appear in
+Finder as a mounted drive. It runs in Apple's App Sandbox with the smallest set of permissions it
+can work with, and you build it yourself from this source.
 
 > [!NOTE]
 > This is an independent open-source project, not an official Upstash product. It was
